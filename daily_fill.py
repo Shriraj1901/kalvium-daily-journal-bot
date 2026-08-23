@@ -99,6 +99,14 @@ def submit():
         page = context.new_page()
         page.goto(FORM_URL, wait_until="networkidle")
 
+        if "accounts.google.com" in page.url:
+            page.screenshot(path="submit_failure.png", full_page=True)
+            browser.close()
+            sys.exit(
+                "Saved session has expired/logged out (redirected to Google sign-in). "
+                "Re-run discover_form.py locally and update the AUTH_STATE secret."
+            )
+
         try:
             checkbox = page.get_by_role("checkbox").first
             if checkbox.count() and not checkbox.is_checked():
