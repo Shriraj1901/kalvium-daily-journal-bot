@@ -1,0 +1,5 @@
+venv/
+__pycache__/
+auth_state.json
+form_structure_raw.json
+*.png

@@ -1,0 +1,39 @@
+name: Daily Journal Submission
+
+on:
+  schedule:
+    # 10:30 UTC = 16:00 IST, Monday-Friday
+    - cron: "30 10 * * 1-5"
+  workflow_dispatch: {}
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Restore auth state
+        run: printf '%s' "$AUTH_STATE" > auth_state.json
+        env:
+          AUTH_STATE: ${{ secrets.AUTH_STATE }}
+
+      - name: Submit today's journal entry
+        run: python daily_fill.py
+
+      - name: Upload failure screenshot
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: submit-failure
+          path: submit_failure.png
+          if-no-files-found: ignore
