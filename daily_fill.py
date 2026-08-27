@@ -4,6 +4,7 @@ Reuses a saved logged-in session (auth_state.json) so no credentials are
 stored anywhere. Selects "working day, present" and fills the four
 follow-up questions with varied, generated content each run.
 """
+import json
 import os
 import random
 import sys
@@ -99,7 +100,17 @@ def submit():
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        context = browser.new_context(storage_state="auth_state.json")
+        try:
+            with open("auth_state.json", encoding="utf-8") as auth_file:
+                auth_state = json.load(auth_file)
+        except (FileNotFoundError, json.JSONDecodeError) as error:
+            browser.close()
+            sys.exit(
+                "auth_state.json is missing or invalid. Recreate it with "
+                f"discover_form.py and update AUTH_STATE. Details: {error}"
+            )
+
+        context = browser.new_context(storage_state=auth_state)
         page = context.new_page()
         page.goto(FORM_URL, wait_until="networkidle")
 

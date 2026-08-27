@@ -23,7 +23,7 @@ To fix it, re-run the one-time login capture and update the secret:
 
 ```
 venv\Scripts\python.exe discover_form.py
-gh secret set AUTH_STATE --repo Shriraj1901/kalvium-daily-journal-bot < auth_state.json
+Get-Content -Raw auth_state.json | gh secret set AUTH_STATE --repo Shriraj1901/kalvium-daily-journal-bot
 ```
 
 `discover_form.py` opens a real browser window — log into

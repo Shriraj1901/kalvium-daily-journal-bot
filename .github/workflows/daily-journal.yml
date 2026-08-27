@@ -23,7 +23,13 @@ jobs:
           python -m playwright install --with-deps chromium
 
       - name: Restore auth state
-        run: printf '%s' "$AUTH_STATE" > auth_state.json
+        run: |
+          if [ -z "$AUTH_STATE" ]; then
+            echo "AUTH_STATE secret is empty or missing. Create it from your local auth_state.json."
+            exit 1
+          fi
+          printf '%s' "$AUTH_STATE" > auth_state.json
+          python -c "import json; json.load(open('auth_state.json', encoding='utf-8'))"
         env:
           AUTH_STATE: ${{ secrets.AUTH_STATE }}
 
