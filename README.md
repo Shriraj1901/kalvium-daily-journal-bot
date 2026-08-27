@@ -23,18 +23,21 @@ To fix it, re-run the one-time login capture and update the secret:
 
 ```
 venv\Scripts\python.exe discover_form.py
-gh secret set AUTH_STATE --repo Shubham-Padkonde/kalvium-daily-journal-bot < auth_state.json
+gh secret set AUTH_STATE --repo Shriraj1901/kalvium-daily-journal-bot < auth_state.json
 ```
 
 `discover_form.py` opens a real browser window — log into
-`shubham.padkonde.s73@kalvium.community`, wait until the form itself is
-visible, then press Enter in the terminal. That regenerates `auth_state.json`
+`shriraj.jadhav.s73@kalvium.community`, wait until the form itself is visible,
+then press Enter in the terminal. That regenerates `auth_state.json`
 locally, which the second command uploads as the new secret.
+
+The default form URL is the Kalvium journal form currently configured in the
+scripts. To use a different form, set `FORM_URL` before running either script.
 
 ## Manually triggering a run
 
 ```
-gh workflow run daily-journal.yml --repo Shubham-Padkonde/kalvium-daily-journal-bot
+gh workflow run daily-journal.yml --repo Shriraj1901/kalvium-daily-journal-bot
 ```
 
 ## Notes

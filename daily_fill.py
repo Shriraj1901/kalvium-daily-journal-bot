@@ -4,11 +4,15 @@ Reuses a saved logged-in session (auth_state.json) so no credentials are
 stored anywhere. Selects "working day, present" and fills the four
 follow-up questions with varied, generated content each run.
 """
+import os
 import random
 import sys
 from playwright.sync_api import sync_playwright
 
-FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSc8RRUAG8n8nPB9dm21m_MxwHQ-JuDnEj7GnvwEkWXykkKFuQ/viewform"
+FORM_URL = os.getenv(
+    "FORM_URL",
+    "https://docs.google.com/forms/d/e/1FAIpQLSc8RRUAG8n8nPB9dm21m_MxwHQ-JuDnEj7GnvwEkWXykkKFuQ/viewform",
+)
 
 TASKS = [
     "reviewing the onboarding module requirements",

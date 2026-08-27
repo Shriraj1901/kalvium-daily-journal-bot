@@ -1,0 +1,44 @@
+{
+  "form_title": null,
+  "questions": [
+    {
+      "title": "A confirmation to start with - was today a working day for you?",
+      "type_code": 2,
+      "entry_id": "entry.187493348",
+      "options": [
+        "It was a campus holiday",
+        "It was a working day, and I was present",
+        "It was a working day, but I was on leave or absent"
+      ],
+      "required": true
+    },
+    {
+      "title": "What were your key tasks for the day?",
+      "type_code": 1,
+      "entry_id": "entry.32162408",
+      "options": null,
+      "required": true
+    },
+    {
+      "title": "What challenges/problems did you solve today?",
+      "type_code": 1,
+      "entry_id": "entry.1874357572",
+      "options": null,
+      "required": true
+    },
+    {
+      "title": "What challenges/problems you were NOT able to solve today and are planning to solve in upcoming days?",
+      "type_code": 1,
+      "entry_id": "entry.199221807",
+      "options": null,
+      "required": true
+    },
+    {
+      "title": "What is your plan for the next day of Simulated Work?",
+      "type_code": 1,
+      "entry_id": "entry.1546753981",
+      "options": null,
+      "required": true
+    }
+  ]
+}
